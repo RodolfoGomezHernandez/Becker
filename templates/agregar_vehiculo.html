@@ -1,0 +1,151 @@
+{% extends "dash.html" %} {% block title %} Administrador - Automotora Becker {%
+endblock %} {% block content %}
+<div class="container mt-4">
+  <h2>Agregar Vehículo</h2>
+
+  {% with messages = get_flashed_messages(with_categories=true) %} {% if
+  messages %}
+  <div class="my-4 flash-messages">
+    {% for category, message in messages %}
+    <div
+      class="alert alert-{{ category }} alert-dismissible fade show"
+      role="alert"
+    >
+      {{ message }}
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      ></button>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %} {% endwith %}
+
+  <form
+    method="POST"
+    action="/admin/agregar_vehiculo"
+    enctype="multipart/form-data"
+  >
+    <div class="mb-3">
+      <label for="patente" class="form-label">Patente</label>
+      <input
+        type="text"
+        class="form-control"
+        id="patente"
+        name="patente"
+        placeholder="Ej. ABC123"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="marca" class="form-label">Marca</label>
+      <input
+        type="text"
+        class="form-control"
+        id="marca"
+        name="marca"
+        placeholder="Ej. Toyota"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="modelo" class="form-label">Modelo</label>
+      <input
+        type="text"
+        class="form-control"
+        id="modelo"
+        name="modelo"
+        placeholder="Ej. Corolla"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="precio" class="form-label">Precio</label>
+      <input
+        type="number"
+        class="form-control"
+        id="precio"
+        name="precio"
+        placeholder="Ej. 10000000"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="año" class="form-label">Año</label>
+      <input
+        type="number"
+        class="form-control"
+        id="año"
+        name="año"
+        placeholder="Ej. 2022"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="combustible" class="form-label">combustible</label>
+      <input
+        type="text"
+        class="form-control"
+        id="combustible"
+        name="combustible"
+        placeholder="Ej. Diesel"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="fecha_adquisicion" class="form-label">Fecha De Compra</label>
+      <input
+        type="date"
+        class="form-control"
+        id="fecha_adquisicion"
+        name="fecha_adquisicion"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="kilometraje" class="form-label">kilometraje</label>
+      <input
+        type="number"
+        class="form-control"
+        id="kilometraje"
+        name="kilometraje"
+        placeholder="Ej. 60.000"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="estado" class="form-label">Estado</label>
+      <select class="form-control" id="estado" name="estado" required>
+        <option value="">Seleccione un estado</option>
+        <option value="Vendido">Vendido</option>
+        <option value="En Venta">En Venta</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="descripcion" class="form-label">Descripción</label>
+      <textarea
+        class="form-control"
+        id="descripcion"
+        name="descripcion"
+        rows="3"
+        required
+      ></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="imagenes" class="form-label">Imágenes</label>
+      <input
+        type="file"
+        class="form-control"
+        id="imagenes"
+        name="imagenes"
+        accept="image/*"
+        multiple
+        required
+      />
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+  </form>
+</div>
+{% endblock %}

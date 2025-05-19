@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ vehiculo.marca }} {{ vehiculo.modelo }} - Automotora Becker
+{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+    <h1 class="display-5 mb-4">{{ vehiculo.marca }} {{ vehiculo.modelo }}</h1>
+    
+    <div class="row g-4">
+        <!-- Columna del carrusel -->
+        <div class="col-md-6">
+            <div id="carruselVehiculo" class="carousel slide shadow-lg" data-bs-ride="carousel">
+                <div class="carousel-inner rounded-3">
+                    {% for img in imagenes %}
+                    <div class="carousel-item {% if loop.first %}active{% endif %}" data-bs-slide-to="{{ loop.index0 }}">
+                        <img 
+                            src="{{ url_for('static', filename=img.ruta)}}" 
+                            class="d-block w-100 zoomable" 
+                            alt="{{ vehiculo.marca }} {{ vehiculo.modelo }} - Imagen {{ loop.index }}"
+                            data-fullsize="{{ url_for('static', filename=img.ruta) }}"
+                        >
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <button class="carousel-control-prev" type="button" data-bs-target="#carruselVehiculo" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carruselVehiculo" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
+            </div>
+            
+
+            <!-- Miniaturas -->
+            <div class="row mt-4">
+                <div class="col-12 d-flex overflow-x-auto pb-3 thumbnails-scroll">
+                    {% for img in imagenes %}
+                    <div class="thumbnail-item mx-1 {% if loop.first %}active{% endif %}" 
+                         data-bs-target="#carruselVehiculo" 
+                         data-bs-slide-to="{{ loop.index0 }}">
+                        <img src="{{ url_for('static', filename=img.ruta)}}" 
+                             class="img-fluid" 
+                             alt="Miniatura {{ loop.index }}">
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Columna de especificaciones -->
+        <div class="col-md-6 ps-lg-5">
+            <div class="specs-card p-4 shadow rounded-3">
+                <h3 class="mb-4 fw-bold">Ficha técnica</h3>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                        <span class="fw-500">Marca:</span>
+                        <span class="text-muted">{{ vehiculo.marca }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                        <span class="fw-500">Modelo:</span>
+                        <span class="text-muted">{{ vehiculo.modelo }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                        <span class="fw-500">Año:</span>
+                        <span class="text-muted">{{ vehiculo.año }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                        <span class="fw-500">Kilometraje:</span>
+                        <span class="text-muted">{{ vehiculo.kilometraje | miles }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                        <span class="fw-500">Dirección:</span>
+                        <span class="text-muted">{{ vehiculo.direccion }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                        <span class="fw-500">Combustible:</span>
+                        <span class="text-muted">{{ vehiculo.combustible }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                        <span class="fw-500">Precio:</span>
+                        <span class="text-muted">{{ vehiculo.precio | miles }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                        <span class="fw-500">Estado:</span>
+                        <span class="text-muted">{{ vehiculo.estado }}</span>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="fw-500">Descripción:</span>
+                        </div>
+                        <p class="text-muted mb-0">{{ vehiculo.descripcion }}</p>
+                    </li>  
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Crea el elemento lupa
+      const magnifier = document.createElement('div');
+      magnifier.id = 'magnifier';
+      document.body.appendChild(magnifier);
+      
+      // Crea la imagen ampliada dentro de la lupa
+      const zoomedImage = new Image();
+      zoomedImage.style.position = 'absolute';
+      magnifier.appendChild(zoomedImage);
+      
+      // Selecciona todas las imágenes zoomable
+      const zoomableImages = document.querySelectorAll('.carousel-item img.zoomable');
+      
+      zoomableImages.forEach(img => {
+        // Al entrar, usa el atributo data-fullsize o el src original
+        img.addEventListener('mouseenter', function() {
+          zoomedImage.src = img.getAttribute('data-fullsize') || img.src;
+        });
+        
+        img.addEventListener('mousemove', function(e) {
+          magnifier.style.display = 'block';
+          const rect = img.getBoundingClientRect();
+          // Calcula la posición relativa del mouse en la imagen
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const zoom = 2; // Factor de zoom (puedes ajustarlo)
+          
+          // Posiciona la lupa a 20px a la derecha del cursor (ajusta según necesites)
+          magnifier.style.left = e.pageX + 20 + 'px';
+          magnifier.style.top = e.pageY - magnifier.offsetHeight / 2 + 'px';
+          
+          // Ajusta el tamaño de la imagen ampliada
+          zoomedImage.style.width = img.offsetWidth * zoom + 'px';
+          zoomedImage.style.height = img.offsetHeight * zoom + 'px';
+          
+          // Calcula el desplazamiento para centrar la parte ampliada
+          let imgX = -x * zoom + magnifier.offsetWidth / 2;
+          let imgY = -y * zoom + magnifier.offsetHeight / 2;
+          zoomedImage.style.left = imgX + 'px';
+          zoomedImage.style.top = imgY + 'px';
+        });
+        
+        img.addEventListener('mouseleave', function() {
+          magnifier.style.display = 'none';
+        });
+      });
+    });
+    </script>
+    
+
+{% endblock %}

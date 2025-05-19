@@ -1,0 +1,305 @@
+{% extends "base.html" %} {% block title %} Inicio - Automotora Becker
+{%endblock %} {% block content %}
+
+<div
+  id="carouselExampleControlsNoTouching"
+  class="carousel slide"
+  data-bs-ride="carousel"
+  data-bs-interval="2500"
+  data-bs-touch="true"
+>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <div class="image-container">
+        <img
+          src="{{ url_for('static', filename='img/carrusel1.jpg') }}"
+          class="d-block w-100"
+          alt="Imagen 1"
+        />
+      </div>
+      <div class="carousel-caption-custom">
+        <h4 class="mb-4">COMPRAMOS TU AUTO</h4>
+        <p>Compramos vehículos de todas las marcas, modelo y año</p>
+        <a
+          href="{{ url_for('contacto') }}"
+          class="btn btn-secondary boton-carrusel fw-bold"
+          role="button"
+          >MAS INFORMACION</a
+        >
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div class="image-container">
+        <img
+          src="{{ url_for('static', filename='img/carrusel2.jpg') }}"
+          class="d-block w-100"
+          alt="Imagen 2"
+        />
+      </div>
+      <div class="carousel-caption-custom">
+        <h4 class="mb-4">CONSIGNACION</h4>
+        <p>Vende tu auto con nosotros, de forma segura, rápida y confiable.</p>
+        <a
+          href="{{ url_for('contacto') }}"
+          class="btn btn-secondary boton-carrusel fw-bold"
+          role="button"
+          >CONTACTANOS</a
+        >
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div class="image-container">
+        <img
+          src="{{ url_for('static', filename='img/carrusel3.jpg') }}"
+          class="d-block w-100"
+          alt="Imagen 3"
+        />
+      </div>
+      <div class="carousel-caption-custom">
+        <h4 class="mb-4">FINANCIAMIENTO</h4>
+        <p>
+          Trabajamos con distintas entidades financieras, buscando siempre la
+          opción más conveniente para ti.
+        </p>
+        <a
+          href="{{ url_for('contacto') }}"
+          class="btn btn-secondary boton-carrusel fw-bold"
+          role="button"
+          >CONTACTANOS</a
+        >
+      </div>
+    </div>
+  </div>
+  <button
+    class="carousel-control-prev"
+    type="button"
+    data-bs-target="#carouselExampleControlsNoTouching"
+    data-bs-slide="prev"
+  >
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Anterior</span>
+  </button>
+  <button
+    class="carousel-control-next"
+    type="button"
+    data-bs-target="#carouselExampleControlsNoTouching"
+    data-bs-slide="next"
+  >
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Siguiente</span>
+  </button>
+</div>
+
+<!--Ultimas publicaciones-->
+<div class="container my-4">
+  <div class="row align-items-center bg-dark">
+    <div class="col-12 d-flex justify-content-between align-items-center">
+      <h2 class="text-white bg-dark py-3 mb-0">ULTIMAS PUBLICACIONES</h2>
+      <!--
+      <button
+        class="btn btn-light btn-sm d-md-none"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#publicacionesCollapse"
+        aria-expanded="false"
+        aria-controls="publicacionesCollapse"
+      >
+        <i class="fas fa-chevron-down" id="toggleIcon"></i>
+      </button>
+-->
+
+      <a href="/vehiculos" class="btn btn-primary">VER CATALOGO</a>
+    </div>
+  </div>
+
+  <div class="row d-md-flex">
+    {% for publicacion in ultimas_publicaciones %}
+    <div class="col-12 col-md-3 mb-4">
+      <div class="card h-100 d-flex flex-column">
+        <img
+          src="{{ url_for('static', filename=publicacion.img) }}"
+          class="card-img-top"
+          alt="..."
+        />
+
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">
+            {{ publicacion.marca }} {{ publicacion.modelo }} {{ publicacion.año
+            }}
+          </h5>
+
+          <p class="card-text" style="flex: 1">
+            {{ publicacion.descripcion[:50] }}...
+          </p>
+
+          <div class="mt-auto">
+            <a
+              href="{{ url_for('vehiculo', patente=publicacion.patente) }}"
+              class="btn btn-primary btn-sm"
+            >
+              Ver más
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<!--
+
+===========================================================
+CONTADOR DE STOCK
+===========================================================
+
+
+<div class="stock-banner bg-dark">
+  <div class="container">
+    <h5>Stock Disponible:</h5>
+    <p>
+      <span class="stock-number">{{ total_vehiculos }}</span>
+    </p>
+    <a href="/vehiculos" class="button">VER CATALOGO COMPLETO </a>
+  </div>
+</div>
+-->
+
+<!--
+============================================
+CAMBIO DE DIRECCION DEL ICONO
+============================================
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const collapseElement = document.getElementById("publicacionesCollapse");
+    const toggleIcon = document.getElementById("toggleIcon");
+
+    if (collapseElement && toggleIcon) {
+      // Asegurarse que los elementos existen
+      collapseElement.addEventListener("show.bs.collapse", function () {
+        toggleIcon.classList.remove("fa-chevron-down");
+        toggleIcon.classList.add("fa-chevron-up");
+      });
+
+      collapseElement.addEventListener("hide.bs.collapse", function () {
+        toggleIcon.classList.remove("fa-chevron-up");
+        toggleIcon.classList.add("fa-chevron-down");
+      });
+    }
+  });
+</script>
+-->
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+      <section id="scrollspyHeading3" class="mb-5">
+        <div class="contenedor-somos shadow rounded bg-light py-5 px-5">
+          <h2 class="display-4 mb-4 text-center">¿QUIENES SOMOS?</h2>
+          <p class="quienes-somos-descripcion mt-5">
+            Somos una empresa familiar con más de diez años de trayectoria en el
+            rubro automotriz. Nos destacamos por ofrecer a nuestros clientes la
+            mejor combinación de precio y calidad, brindando opciones confiables
+            y accesibles. Nuestra experiencia y compromiso nos permite
+            garantizar un servicio que se ajusta a las necesidades del mercado,
+            siempre priorizando la satisfacción y confianza de quienes nos
+            eligen.
+          </p>
+        </div>
+      </section>
+
+      <section id="scrollspyHeading4" class="mb-5">
+        <div class="text-center shadow rounded bg-light py-5 px-5">
+          <h2 class="display-5 mb-5">¿NECESITAS FINANCIAMIENTO AUTOMOTRIZ?</h2>
+          <p class="quienes-somos-descripcion mt-5">
+            Trabajamos con distintas entidades financieras, buscando siempre la
+            opción más conveniente para ti.
+          </p>
+        </div>
+        <div class="row mt-5 justify-content-center align-items-center">
+          <div class="col-6 col-md-4 col-lg-3 mb-4 text-center">
+            <img
+              src="/static/img/Financiamiento/autofidem.jpg"
+              alt="Autofidem"
+              class="img-fluid rounded shadow"
+              style="max-width: 100%; height: 100px; object-fit: contain"
+            />
+          </div>
+          <div class="col-6 col-md-4 col-lg-3 mb-4 text-center">
+            <img
+              src="/static/img/Financiamiento/global1.jpg"
+              alt="Global"
+              class="img-fluid rounded shadow"
+              style="max-width: 100%; height: 100px; object-fit: contain"
+            />
+          </div>
+          <div class="col-6 col-md-4 col-lg-3 mb-4 text-center">
+            <img
+              src="/static/img/Financiamiento/unidad.jpg"
+              alt="Unidad"
+              class="img-fluid rounded shadow"
+              style="max-width: 100%; height: 100px; object-fit: contain"
+            />
+          </div>
+          <div class="col-6 col-md-4 col-lg-3 mb-4 text-center">
+            <img
+              src="/static/img/Financiamiento/Banco-Falabella.png"
+              alt="Falabella"
+              class="img-fluid rounded shadow"
+              style="max-width: 100%; height: 100px; object-fit: contain"
+            />
+          </div>
+          <div class="col-6 col-md-4 col-lg-3 mb-4 text-center">
+            <img
+              src="/static/img/Financiamiento/autofi.jpg"
+              alt="Autofi"
+              class="img-fluid rounded shadow"
+              style="max-width: 100%; height: 100px; object-fit: contain"
+            />
+          </div>
+        </div>
+
+        <div class="row justify-content-center mt-4">
+          <div class="col-md-10">
+            <div class="shadow rounded bg-light py-5 px-5">
+              <h1 class="text-center text-secondary mb-3">REQUISITOS</h1>
+              <ul class="list-group list-group-flush bg-light">
+                <li class="list-group-item bg-light text-center">
+                  Pie inicial desde 20%
+                </li>
+                <li class="list-group-item bg-light text-center">
+                  No tener antecedentes comerciales negativos
+                </li>
+                <li class="list-group-item bg-light text-center">
+                  Plazo hasta 60 cuotas
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="scrollspyHeading5" class="mb-5">
+        <div class="text-center shadow rounded bg-light py-5 px-5">
+          <h1 class="display-4 mb-5">TRANSFERENCIAS A TERCEROS.</h1>
+          <p class="quienes-somos-descripcion mt-5">
+            Transfiere tu vehículo con seguridad.
+          </p>
+          <p class="quienes-somos-descripcion">
+            Automotora Becker ofrece el servicio de transferencia digital,
+            gestionando el proceso de inicio a fin y desde la comodidad de tu
+            hogar.
+          </p>
+          <p class="quienes-somos-descripcion">
+            Proceso 100% seguro con sistema blindado contra falsificadores para
+            evitar estafas.
+          </p>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

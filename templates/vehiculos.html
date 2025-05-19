@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+
+{% block title %}
+Vehículos - Automotora Becker
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="container my-4">
+        <div class="row align-items-center bg-dark">
+          <div class="col-12 d-flex justify-content-between align-items-center">
+            <h2 class="text-white bg-dark py-3 mb-0">Últimas Publicaciones</h2>
+      
+            <!-- Botón para mostrar/ocultar en móviles (solo ícono) -->
+            <button class="btn btn-light btn-sm d-md-none" 
+                    type="button" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#publicacionesCollapse" 
+                    aria-expanded="false" 
+                    aria-controls="publicacionesCollapse">
+              <i class="fas fa-chevron-down" id="toggleIcon"></i>
+            </button>
+          </div>
+        </div>
+      
+        <!-- Contenedor de publicaciones con colapso en móviles -->
+        <div class="row collapse d-md-flex" id="publicacionesCollapse">
+          {% for publicacion in ultimas_publicaciones %}
+          <div class="col-12 col-md-3 mb-4">
+            <!-- Card con altura completa y contenido distribuido -->
+            <div class="card h-100 d-flex flex-column">
+              <img src="{{ url_for('static', filename=publicacion.img) }}" class="card-img-top" alt="...">
+              
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">{{ publicacion.marca }} {{ publicacion.modelo }} {{ publicacion.año }}</h5>
+                
+                <!-- Mostrar solo 50 caracteres de la descripción (puedes ajustar el número) -->
+                <p class="card-text" style="flex: 1;">
+                  {{ publicacion.descripcion[:50] }}...
+                </p>
+      
+                <!-- Botón "Ver más" que lleva al detalle del vehículo -->
+                <div class="mt-auto">
+                  <a href="{{ url_for('vehiculo', patente=publicacion.patente) }}" class="btn btn-primary btn-sm">
+                    Ver más
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      
+      <!-- Script para cambiar el ícono segun colapse abierto/cerrado -->
+      <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const collapseElement = document.getElementById('publicacionesCollapse');
+        const toggleIcon = document.getElementById('toggleIcon');
+      
+        collapseElement.addEventListener('show.bs.collapse', function () {
+          toggleIcon.classList.remove('fa-chevron-down');
+          toggleIcon.classList.add('fa-chevron-up');
+        });
+      
+        collapseElement.addEventListener('hide.bs.collapse', function () {
+          toggleIcon.classList.remove('fa-chevron-up');
+          toggleIcon.classList.add('fa-chevron-down');
+        });
+      });
+      </script>
+      
+
+    <!-- SECCIÓN DE CATÁLOGO CON PAGINACIÓN -->
+    <div class="container my-4">
+        <div class="row align-items-center bg-dark">
+            <div class="col-12 d-flex justify-content-center">
+                <h2 class="text-white bg-dark py-3 mb-0">Catálogo</h2>
+            </div>
+        </div>
+
+        <!-- Grid de vehículos actuales -->
+        <div class="row">
+            {% for auto in autos %}
+            <div class="col-12 col-md-4 mb-4 card-img-aum">
+                <div class="card h-100 shadow">
+                    <img 
+                        src="{{ url_for('static', filename=auto.img) if auto.img else url_for('static', filename='img/default.jpg') }}"
+                        class="card-img-top"
+                        alt="{{ auto.marca }} {{ auto.modelo }}"
+                        loading="lazy"
+                        width="300"
+                        height="200"
+                    >
+                    <div class="card-body">
+                        <h5 class="card-title">{{ auto.marca }} {{ auto.modelo }} {{ auto.año }}</h5>
+
+                        <!-- Estado en color según si está Vendido o En Venta -->
+                        <p class="card-text">
+                            {% if auto.estado == 'Vendido' %}
+                                <span style="color: red; font-weight: bold;">{{ auto.estado }}</span>
+                            {% elif auto.estado == 'En Venta' %}
+                                <span style="color: green; font-weight: bold;">{{ auto.estado }}</span>
+                            {% else %}
+                                {{ auto.estado }}
+                            {% endif %}
+                        </p>
+
+                        <p class="card-text">
+                            <strong>Precio:</strong> {{ auto.precio | miles }}
+                        </p>
+                        <a href="{{ url_for('vehiculo', patente=auto.patente) }}" class="btn btn-primary">Ver más</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Paginación -->
+        <nav aria-label="Paginación de Catálogo" class="my-4">
+            <ul class="pagination justify-content-center">
+
+                <!-- Botón Anterior -->
+                {% if page > 1 %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('vehiculos', page=page-1) }}" aria-label="Anterior">
+                        Anterior
+                    </a>
+                </li>
+                {% endif %}
+
+                <!-- Links numéricos -->
+                {% for p in range(1, total_pages + 1) %}
+                <li class="page-item {% if p == page %}active{% endif %}">
+                    <a class="page-link" href="{{ url_for('vehiculos', page=p) }}">
+                        {{ p }}
+                    </a>
+                </li>
+                {% endfor %}
+
+                <!-- Botón Siguiente -->
+                {% if page < total_pages %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('vehiculos', page=page+1) }}" aria-label="Siguiente">
+                        Siguiente
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</div>
+{% endblock %}

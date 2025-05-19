@@ -1,0 +1,51 @@
+{% extends "dash.html" %}
+
+{% block title %}
+Administrador - Automotora Becker
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5 col-4">
+    <h2>Eliminar Vehículo</h2>
+    <form action="{{ url_for('eliminar_vehiculo') }}" method="POST">
+        <div class="mb-3">
+            <label for="patente" class="form-label">Patente del Vehículo</label>
+            <input type="text" class="form-control" id="patente" name="patente" required>
+        </div>
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+    </form>
+</div>
+<div class="container mt-5">
+    <h3>Listado de Vehículos</h3>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Patente</th>
+                    <th>Modelo</th>
+                    <th>Marca</th>
+                    <th>Año</th>
+                    <th>Precio</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for vehiculo in vehiculos %}
+                <tr>
+                    <td>{{ vehiculo.patente }}</td>
+                    <td>{{ vehiculo.modelo }}</td>
+                    <td>{{ vehiculo.marca }}</td>
+                    <td>{{ vehiculo.año }}</td>
+                    <td>
+                        {% if vehiculo.precio is not none %}
+                            ${{ vehiculo.precio | miles }}
+                        {% else %}
+                            No disponible
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

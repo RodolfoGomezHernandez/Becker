@@ -1,0 +1,43 @@
+# Entornos Virtuales
+venv/
+.venv/
+env/
+ENV/
+
+# Archivos de Python compilados y caché
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Archivos de variables de entorno y secretos
+.env
+instance/
+
+# Datos de sesión de Flask
+# (Si moviste encriptar.py fuera, esta regla solo afectará a los datos de sesión)
+flask_session/
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
+logs/
+
+# Archivos de IDEs/Editores (personaliza según sea necesario)
+.vscode/
+# .idea/
+
+# Ignorar el contenido de las subcarpetas generadas para vehículos dentro de static/img/
+# Esto asume que las patentes (nombres de carpetas) no contienen caracteres especiales que rompan el patrón.
+# Esta regla ignora cualquier CARPETA de un nivel dentro de static/img.
+# Las imágenes directamente en static/img/ (como logo2.png, carruselX.jpg) NO son carpetas, por lo que no se ignoran.
+# La carpeta Financiamiento/ SÍ sería ignorada por esto. Por lo tanto, la excluimos explícitamente.
+static/img/*/
+!static/img/Financiamiento/
+
+# Si tienes otras carpetas específicas dentro de static/img que SÍ quieres versionar,
+# añade una línea similar con "!" para ellas, ej:
+# !static/img/mi_otra_carpeta_de_diseno/

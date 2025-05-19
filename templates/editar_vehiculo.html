@@ -1,0 +1,180 @@
+{% extends "dash.html" %} {% block title %}Editar Vehículo - {{ vehiculo.patente
+}}{% endblock %} {% block content %}
+<div class="container mt-4">
+  <h2>Editar Vehículo: {{ vehiculo.patente }}</h2>
+  {% with messages = get_flashed_messages(with_categories=true) %} {% if
+  messages %} {% for category, message in messages %}
+  <div
+    class="alert alert-{{ category }} alert-dismissible fade show"
+    role="alert"
+  >
+    {{ message }}
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    ></button>
+  </div>
+  {% endfor %} {% endif %} {% endwith %}
+
+  <form method="POST" enctype="multipart/form-data">
+    <div class="mb-3">
+      <label class="form-label">Marca:</label>
+      <input
+        type="text"
+        class="form-control"
+        name="marca"
+        value="{{ vehiculo.marca }}"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Modelo:</label>
+      <input
+        type="text"
+        class="form-control"
+        name="modelo"
+        value="{{ vehiculo.modelo }}"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Precio:</label>
+      <input
+        type="number"
+        class="form-control"
+        name="precio"
+        value="{{ vehiculo.precio }}"
+        step="0.01"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Año:</label>
+      <input
+        type="number"
+        class="form-control"
+        name="año"
+        value="{{ vehiculo.año }}"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Combustible:</label>
+      <input
+        type="text"
+        class="form-control"
+        name="combustible"
+        value="{{ vehiculo.combustible }}"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Fecha De Compra:</label>
+      <input
+        type="date"
+        class="form-control"
+        name="fecha_adquisicion"
+        value="{{ vehiculo.fecha_adquisicion }}"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Kilometraje:</label>
+      <input
+        type="number"
+        class="form-control"
+        name="kilometraje"
+        value="{{ vehiculo.kilometraje }}"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="estado" class="form-label">Estado</label>
+      <select class="form-control" id="estado" name="estado" required>
+        <option value="">Seleccione un estado</option>
+        <option value="Vendido">Vendido</option>
+        <option value="En Venta">En Venta</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Descripción:</label>
+      <textarea class="form-control" name="descripcion" required>
+        {{ vehiculo.descripcion }}</textarea
+      >
+    </div>
+
+    <!-- Sección de imágenes existentes -->
+    <h4 class="mt-4">Imágenes actuales</h4>
+    <div class="row">
+      {% for imagen in imagenes %}
+      <div class="col-md-3 mb-3">
+        <div class="card">
+          <img
+            src="{{ url_for('static', filename=imagen.ruta) }}"
+            class="card-img-top"
+          />
+          <div class="card-body text-center">
+            <button
+              type="button"
+              class="btn btn-danger btn-sm"
+              onclick="eliminarImagen({{ imagen.id }})"
+            >
+              Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Subir nuevas imágenes -->
+    <h4 class="mt-4">Agregar nuevas imágenes</h4>
+    <input
+      type="file"
+      class="form-control"
+      name="imagenes"
+      multiple
+      accept="image/*"
+    />
+
+    <div class="mt-4">
+      <button type="submit" class="btn btn-primary">Guardar cambios</button>
+      <a href="{{ url_for('listar_vehiculos') }}" class="btn btn-secondary"
+        >Cancelar</a
+      >
+    </div>
+  </form>
+</div>
+
+<script>
+  function eliminarImagen(id) {
+    if (confirm("¿Estás seguro de eliminar esta imagen?")) {
+      fetch(`/admin/eliminar_imagen/${id}`, {
+        method: "POST",
+        headers: {
+          "X-Requested-With": "XMLHttpRequest",
+        },
+      })
+        .then((response) => {
+          if (response.ok) {
+            location.reload();
+          } else {
+            response.text().then((text) => alert(text));
+          }
+        })
+        .catch((error) => alert("Error al eliminar la imagen: " + error));
+    }
+  }
+</script>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+<div class="container my-5">
+  <h2 class="text-center mb-4">Contáctanos</h2>
+  <div class="row justify-content-center">
+  <div class="col-md-6">
+      <form method="post">
+          <div class="mb-3">
+              <label for="name" class="form-label">Nombre</label>
+                  <input type="text" class="form-control" id="name" name="name" placeholder="Ingresa tu nombre" required> <!- - Agregué name="name" -->
+          </div>
+          <div class="mb-3">
+              <label for="email" class="form-label">Correo Electrónico</label>
+              <input type="email" class="form-control" id="email" name="email" placeholder="nombre@correo.com" required>
+          </div>
+          <div class="mb-3">
+          <label for="telefono" class="form-label">Teléfono:</label>
+          <input type="tel" class="form-control" id="telefono" name="telefono" placeholder="+56912345678" pattern="\+569\d{8}" required>
+          <small class="form-text text-muted">Formato: +569XXXXXXXX</small>
+          <div class="mb-3">
+          <label for="message" class="form-label">Mensaje</label>
+          <textarea class="form-control" id="message" name="message" rows="5" placeholder="Escribe tu mensaje" required></textarea> 
+          </div>
+          <div class="d-grid">
+              <button type="submit" class="btn btn-primary">Enviar</button>
+          </div>
+      </form>
+  </div>
+  </div>
+  </div>
+
+
+      <!-- Contact End -->
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/lib/wow/wow.min.js"></script>
+    <script src="../static/lib/easing/easing.min.js"></script>
+    <script src="../static/lib/waypoints/waypoints.min.js"></script>
+    <script src="../static/lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="../static/js/main.js"></script>
