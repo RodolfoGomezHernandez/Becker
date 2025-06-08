@@ -121,20 +121,20 @@
 }
 .carousel-caption-custom h1 {
   /* Estilo para el título */
-  font-weight: bold; /* Hace el título en negrita */
-  font-size: 2.5em; /* Ajusta el tamaño del título si es necesario */
-  margin-bottom: 10px; /* Espacio debajo del título */
+  font-weight: bold;
+  font-size: 2.5em;
+  margin-bottom: 10px;
 }
 
 .carousel-caption-custom p {
-  font-weight: normal; /* Asegura que el párrafo no esté en negrita */
+  font-weight: normal;
   font-size: 1.2em;
-  margin-bottom: 20px; /* Aumenta el espacio entre el párrafo y el botón */
+  margin-bottom: 20px;
 }
 
 .carousel-caption-custom .btn {
   /* Estilo para el botón */
-  margin-top: 15px; /* Ajusta la separación entre el texto y el botón */
+  margin-top: 15px;
 }
 
 @media (max-width: 767.98px) {
@@ -144,19 +144,19 @@
   }
 
   .carousel-caption-custom h1 {
-    font-size: 1.8em; /* Reduce el tamaño del título */
-    margin-bottom: 5px; /* Reduce el margen del título */
+    font-size: 1.8em;
+    margin-bottom: 5px;
   }
 
   .carousel-caption-custom p {
-    font-size: 1em; /* Reduce el tamaño del párrafo */
-    margin-bottom: 10px; /* Reduce el margen del párrafo */
+    font-size: 1em;
+    margin-bottom: 10px;
   }
 
   .carousel-caption-custom .btn {
-    font-size: 0.9em; /* Reduce el tamaño del botón */
-    padding: 8px 16px; /* Reduce el padding del botón */
-    margin-top: 10px; /* Reduce el margen superior del botón */
+    font-size: 0.9em;
+    padding: 8px 16px;
+    margin-top: 10px;
   }
 }
 
@@ -340,48 +340,44 @@
 
 /*  Horario de atención */
 
-/* Estilos para el Horario de Atención (basado en la imagen) */
-
-/* Asegurarse de que el texto esté centrado (si no lo está ya por la clase text-center) */
 .horario-atencion {
   text-align: center;
-  margin-bottom: 20px; /* Espacio inferior para separarlo de otros elementos */
-  background-color: #333; /* Mantengo tu color de fondo, pero recuerda que podría ocultar el borde */
+  margin-bottom: 20px;
+  background-color: #333;
   width: 50%;
   margin-left: 25%;
   border-radius: 8px;
-  box-shadow: 5px 5px grey; /* 5px de desplazamiento horizontal, 5px vertical, color predeterminado */
 }
 
 .horario-atencion h1 {
-  font-size: 2.5em; /* Tamaño de fuente más grande para el título */
-  font-weight: bold; /* Texto en negrita */
-  color: var(--light); /* Color del texto (puedes ajustarlo) */
-  margin-bottom: 15px; /* Espacio debajo del título */
+  font-size: 2.5em;
+  font-weight: bold;
+  color: var(--light);
+  margin-bottom: 15px;
 }
 
 .horario-atencion h4 {
-  font-size: 1.4em; /* Tamaño de fuente para los días */
-  font-weight: bold; /* Texto en negrita */
-  color: var(--primary); /* Color del texto (puedes ajustarlo) */
-  margin-top: 15px; /* Espacio encima de los días */
-  margin-bottom: 5px; /* Espacio debajo de los días */
+  font-size: 1.4em;
+  font-weight: bold;
+  color: var(--primary);
+  margin-top: 15px;
+  margin-bottom: 5px;
 }
 
 .horario-atencion p {
-  font-size: 1.2em; /* Tamaño de fuente normal para las horas */
-  color: #ffffff; /* Color del texto (puedes ajustarlo) */
-  margin-top: 5px; /* Espacio encima de las horas */
-  margin-bottom: 5px; /* Espacio debajo de las horas */
-  padding-left: 20px; /* Indentación para las horas */
-  text-align: center; /* Centrar las horas también */
+  font-size: 1.2em;
+  color: #ffffff;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-left: 20px;
+  text-align: center;
 }
 
 .horario-atencion hr {
-  border: 1px solid #eee; /* Estilo de la línea separadora */
-  margin-top: 30px; /* Espacio encima de la línea */
-  margin-bottom: 30px; /* Espacio debajo de la línea */
-  width: 50%; /* Ancho de la línea (puedes ajustarlo) */
+  border: 1px solid #eee;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  width: 50%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -428,8 +424,8 @@
 .stock-banner .button {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #ffffff; /* Botón blanco */
-  color: #343a40; /* Texto azul */
+  background-color: #ffffff;
+  color: #343a40;
   text-decoration: none;
   border-radius: 5px;
   font-weight: bold;
@@ -454,4 +450,47 @@
 
 .carousel-caption-custom .boton-carrusel {
   font-size: 20px;
+}
+
+/* ===========================================
+   Estilos Responsivos para Móviles
+   =========================================== */
+@media (max-width: 768px) {
+  /* --- Ajustes para el Carrusel --- */
+  .carousel-caption-custom h4 {
+    font-size: 1.5rem; /* Reduce el tamaño del título del carrusel */
+    font-weight: bold;
+  }
+
+  .carousel-caption-custom p {
+    font-size: 0.9rem; /* Reduce el tamaño del párrafo del carrusel */
+    margin-bottom: 15px;
+  }
+
+  .carousel-caption-custom .boton-carrusel {
+    font-size: 0.9rem; /* Reduce el tamaño del botón */
+    padding: 8px 16px;
+  }
+
+  /* --- Ajustes para Títulos de Sección --- */
+  .display-4 {
+    font-size: 2.2rem; /* Reduce significativamente el tamaño de los títulos más grandes */
+    margin-bottom: 1.5rem !important;
+  }
+
+  .display-5 {
+    font-size: 2rem; /* Reduce el tamaño de los títulos grandes */
+  }
+
+  /* --- Ajustes para Párrafos de Descripción --- */
+  .quienes-somos-descripcion {
+    font-size: 1rem; /* Reduce el tamaño de la fuente en los párrafos de descripción */
+    line-height: 1.5;
+  }
+
+  /* --- Ajustes en contenedores para dar más espacio --- */
+  .contenedor-somos,
+  .text-center.shadow.rounded.bg-light {
+    padding: 2rem 1.5rem !important; /* Reduce el padding en móviles */
+  }
 }

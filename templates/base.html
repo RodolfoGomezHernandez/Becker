@@ -3,7 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta property="og:title" content="Automotora Becker" />
+    <meta
+      property="og:description"
+      content="Venta de vehículos de calidad. Compra, consignación y financiamiento."
+    />
+    <meta
+      property="og:image"
+      content="{{ url_for('static', filename='img/logo-icono.png', _external=True) }}"
+    />
+    <meta property="og:url" content="{{ request.url }}" />
+    <meta property="og:type" content="website" />
+
     <title>{% block title %}Automotora Becker{% endblock %}</title>
+
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='img/logo-icono.png') }}"
+      type="image/png"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="{{ url_for('static', filename='img/logo-icono.png') }}"
+    />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "url": "{{ request.url_root }}",
+        "logo": "{{ url_for('static', filename='img/logo-icono.png', _external=True) }}"
+      }
+    </script>
+
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/styles.css') }}"
@@ -20,17 +53,16 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5/dist/fancybox/fancybox.css"
     />
-
-    <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
-
-    <!-- Libraries Stylesheet -->
-    <link href="../static/lib/animate/animate.css" rel="stylesheet" />
+    <link
+      href="{{ url_for('static', filename='lib/animate/animate.css') }}"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
@@ -81,7 +113,7 @@
                   <a
                     class="dropdown-item"
                     href="{{ url_for('index') }}#scrollspyHeading3"
-                    >Somos</a
+                    >NOSOTROS</a
                   >
                 </li>
                 <li><hr class="dropdown-divider" /></li>
@@ -203,7 +235,8 @@
                   >AutomotoraBecker</a
                 >
               </li>
-              <li>
+
+              <li class="mt-2">
                 <i class="fas fa-map-marker-alt"></i>
                 <a
                   href="https://www.facebook.com/share/19oGdcjwni/?mibextid=wwXIfr"

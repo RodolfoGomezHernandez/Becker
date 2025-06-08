@@ -1,26 +1,30 @@
-{% extends "dash.html" %}
-
-{% block title %}
-Panel de Administración - Automotora Becker
-{% endblock %}
-
-{% block content %}
-
-{% with messages = get_flashed_messages(with_categories=true) %}
-{% if messages %}
-    <div class="my-4 flash-messages">
-        {% for category, message in messages %}
-            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-                {{ message }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        {% endfor %}
-    </div>
-{% endif %}
-{% endwith %}
+{% extends "dash.html" %} {% block title %} Panel de Administración - Automotora
+Becker {% endblock %} {% block content %} {% with messages =
+get_flashed_messages(with_categories=true) %} {% if messages %}
+<div class="my-4 flash-messages">
+  {% for category, message in messages %}
+  <div
+    class="alert alert-{{ category }} alert-dismissible fade show"
+    role="alert"
+  >
+    {{ message }}
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    ></button>
+  </div>
+  {% endfor %}
+</div>
+{% endif %} {% endwith %}
 
 <div class="container mt-4">
-    <h1>Bienvenido al Panel de Administración</h1>
-    <p>Aquí puedes gestionar los vehículos, usuarios y otras configuraciones.</p>
+  <h1>Bienvenido Felipe</h1>
+  <img
+    src="/static/img/logo2.png"
+    alt="Logo-fondo"
+    style="width: 700px; height: 300px; margin-left: 20%; margin-top: 10%"
+  />
 </div>
 {% endblock %}
